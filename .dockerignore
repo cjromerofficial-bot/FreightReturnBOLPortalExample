@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+.tools
+node_modules
+dist
+test-output
+data
+.git
+.claude
+tests
+scripts
+*.md

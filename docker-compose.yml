@@ -1,0 +1,14 @@
+services:
+  freight-tool:
+    build: .
+    image: acme/freight-returns-portal:latest
+    env_file: .env
+    ports:
+      # Local testing. On the hub, publish only to the internal network / reverse proxy.
+      - "8080:8080"
+    volumes:
+      - freight-data:/data
+    restart: unless-stopped
+
+volumes:
+  freight-data:
