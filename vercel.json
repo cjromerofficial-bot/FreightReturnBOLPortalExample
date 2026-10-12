@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/api/:route*", "destination": "/api/router?route=:route*" }
+  ],
+  "functions": {
+    "api/router.mjs": {
+      "maxDuration": 30,
+      "includeFiles": "{routes,lib,config,server,node_modules/pdfjs-dist/legacy/build}/**"
+    }
+  }
+}

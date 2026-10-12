@@ -44,9 +44,19 @@ docker compose up -d --build
 ```
 Try RMAs `RMA100001`–`RMA100004`, or `RMA999999` to see the not-found message.
 
+## Deploy to Vercel
+1. In Vercel, choose **Add New → Project** and import this GitHub repo.
+2. Leave the defaults. `vercel.json` already sets the Vite build, the `dist` output and the API function. No environment variables are needed.
+3. Deploy.
+
+How it works on Vercel:
+- The UI is served as static files.
+- Every `/api/*` request is rewritten to one serverless function (`api/router.mjs`), which dispatches to the same handlers the Node and Docker server uses (`routes/`).
+- The demo runs in mock mode with **in-memory storage**, so history resets when the function goes idle. For real persistence, run the Docker image (SQLite on a volume) or plug a database into `lib/store.mjs`.
+
 ## Layout
 - `src/`: UI (React).
-- `api/`: endpoints.
+- `routes/`: API endpoints. `api/router.mjs` is the Vercel entry point; `server/` is the Node/Docker server.
 - `server/`: HTTP server.
 - `lib/`: business logic, carrier and ERP adapters, storage, PDF generation and parsing.
 - `tests/`: the test scenarios.

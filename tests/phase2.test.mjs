@@ -10,7 +10,7 @@ import { prefillPallets, nextBusinessDay, todayIso, accessorialList, earliestPic
 import { renderPackingList } from '../lib/pdf/packing.mjs';
 import { renderLabels4x6, renderLabelsLetter } from '../lib/pdf/label.mjs';
 import { renderBundle } from '../lib/pdf/bundle.mjs';
-import retryFn from '../api/retry-pickup.mjs';
+import retryFn from '../routes/retry-pickup.mjs';
 
 const Acme = 'Test Rep';
 const ALL = { address: true, items: true, dimensions: true, freightClass: true, destination: true };

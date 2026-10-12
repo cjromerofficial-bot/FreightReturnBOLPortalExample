@@ -18,7 +18,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
 COPY --from=build /app/dist ./dist
 COPY server ./server
-COPY api ./api
+COPY routes ./routes
 COPY lib ./lib
 COPY config ./config
 COPY assets ./assets

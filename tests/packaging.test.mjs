@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { suggestPallets } from '../lib/packaging.mjs';
 import { parseShipmentDoc, palletsFromDoc, pdfLines } from '../lib/docparse.mjs';
-import parseDocFn from '../api/parse-doc.mjs';
+import parseDocFn from '../routes/parse-doc.mjs';
 
 const L = (lineId, sku, description, qty = 1) => ({ lineId, sku, description, qty, unitWeightLb: 10 });
 const dims = (p) => `${p.type} ${p.length}x${p.width}x${p.height}`;

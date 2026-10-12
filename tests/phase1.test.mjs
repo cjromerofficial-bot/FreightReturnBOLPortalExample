@@ -10,7 +10,7 @@ import { prefillPallets, densityPcf, totals, nextBusinessDay, todayIso, suggestC
 import { renderBol } from '../lib/pdf/bol.mjs';
 import { code39Png } from '../lib/pdf/common.mjs';
 import { decodeCode39 } from './code39-decode.mjs';
-import createBolFn from '../api/create-bol.mjs';
+import createBolFn from '../routes/create-bol.mjs';
 
 const Acme = 'Test Rep';
 const ALL_CHECKED = { address: true, items: true, dimensions: true, freightClass: true, destination: true };

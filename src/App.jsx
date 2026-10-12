@@ -48,6 +48,16 @@ const Step = ({ n, title, children, disabled, done }) => (
   </section>
 );
 
+export const REPO_URL = 'https://github.com/cjromerofficial-bot/FreightReturnBOLPortalExample';
+
+/** Slim header link for the portfolio demo. */
+const AboutBar = () => (
+  <div className="about-bar">
+    <a href={REPO_URL} target="_blank" rel="noreferrer">About This Project ↗</a>
+    <span className="hint">Portfolio demo · all data is fake</span>
+  </div>
+);
+
 const money = (n) => `$${Number(n).toFixed(2)}`;
 
 /** Counts up to a dollar amount (skipped when the user prefers reduced motion). */
@@ -131,6 +141,7 @@ function NameGate({ initial, onDone }) {
   const ok = name.trim().length >= 2;
   return (
     <div className="gate">
+      <AboutBar />
       <form className="gate-card" onSubmit={(e) => { e.preventDefault(); if (ok) onDone(name.trim()); }}>
         <div className="gate-truck"><TruckTop /></div>
         <h1>Freight Returns BOL</h1>
@@ -282,6 +293,7 @@ export default function App() {
 
   return (
     <div className="wrap">
+      <AboutBar />
       {cfg.mock && (
         <div className="mock-banner">
           MOCK MODE: NetSuite data is {cfg.modes.netsuite === 'live' ? 'LIVE' : 'fake'}; R+L is {cfg.modes.rl === 'live' ? 'LIVE (real quotes)' : cfg.modes.rl === 'sandbox' ? 'the R+L sandbox' : 'fake'}. Nothing here is a real shipment.

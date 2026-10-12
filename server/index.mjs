@@ -1,11 +1,12 @@
-// Freight Returns BOL Portal server: serves the built UI (dist/) and the API (api/*.mjs).
+// Freight Returns BOL Portal server: serves the built UI (dist/) and the API (routes/*.mjs).
 //   npm run build && npm start      ->  http://localhost:8080
 // Runs as-is in Docker (see Dockerfile). Paths are matched by suffix so the app works
 // whether Acme's hub proxies it at "/", at a sub-path, or frames it.
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'node:url';
+import { ROUTES } from './routes.mjs';
 import { store } from '../lib/store.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -21,12 +22,7 @@ const SECURITY_HEADERS = {
 };
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
 
-// ---- load API routes from api/*.mjs (each exports default handler + config.path)
-const routes = {};
-for (const f of fs.readdirSync(path.join(ROOT, 'api')).filter((x) => x.endsWith('.mjs'))) {
-  const mod = await import(pathToFileURL(path.join(ROOT, 'api', f)).href);
-  routes[mod.config.path] = { fn: mod.default, method: mod.config.method };
-}
+const routes = ROUTES; // see server/routes.mjs
 
 async function handle(req, res) {
   const url = new URL(req.url, `http://localhost:${PORT}`);
